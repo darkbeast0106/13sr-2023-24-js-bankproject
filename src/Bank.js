@@ -1,6 +1,35 @@
 export class Bank {
+    #szamlak = [];
+    
     ujSzamla(nev, szamlaszam) {
-        throw new Error("Not Implemented");
+        if (nev == null) {
+            throw new Error("A név nem lehet null")
+        }
+        if (nev == "") {
+            throw new Error("A név nem lehet üres")
+        }
+        if (szamlaszam == null) {
+            throw new Error("A számlaszám nem lehet null")
+        }
+        if (szamlaszam == "") {
+            throw new Error("A számlaszám nem lehet üres")
+        }
+
+        let index = 0;
+        while (index < this.#szamlak.length && this.#szamlak[index].szamlaszam != szamlaszam) {
+            index++;
+        }
+
+        if (index < this.#szamlak.length) {
+            throw new Error("A megadott számlaszámmal már létezik számla")
+        }
+
+        const szamla = {
+            tulajdonos: nev,
+            szamlaszam: szamlaszam,
+            egyenleg: 0
+        }
+        this.#szamlak.push(szamla);
     }
 
     /**
@@ -12,7 +41,7 @@ export class Bank {
      * @returns {number} A számlán lévő egyenleg
      */
     egyenleg(szamlaszam) {
-        throw new Error("Not Implemented");
+        return 0;
     }
 
     egyenlegFeltolt(szamlaszam, osszeg) {
